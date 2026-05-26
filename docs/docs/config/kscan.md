@@ -36,9 +36,7 @@ Applies to: [`/chosen` node](https://docs.zephyrproject.org/4.1.0/build/dts/intr
 
 Keyboard scan driver which works like a regular matrix but uses a demultiplexer to drive the rows or columns. This allows N GPIOs to drive N<sup>2</sup> rows or columns instead of just N like with a regular matrix.
 
-:::note
-Currently this driver does not honor the `CONFIG_ZMK_KSCAN_DEBOUNCE_*` settings.
-:::
+Note that this driver does not honor the `CONFIG_ZMK_KSCAN_DEBOUNCE_*` settings.
 
 ### Devicetree
 

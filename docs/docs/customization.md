@@ -35,15 +35,9 @@ Refer to the [Keymaps](keymaps/index.mdx) documentation to learn more.
 After making any changes you want, you should commit the changes and then push them to GitHub. That will trigger a new
 GitHub Actions job to build your firmware which you can download once it completes.
 
-:::note
-If you need to, a review of [Learn The Basics Of Git In Under 10 Minutes](https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/) will help you get these steps right.
-:::
-
-:::note
 It is also possible to build firmware locally on your computer by following the [toolchain setup](development/local-toolchain/setup/index.md) and
 [building instructions](development/local-toolchain/build-flash.mdx), which includes pointers to
 [building using your `zmk-config` folder](development/local-toolchain/build-flash.mdx#building-from-zmk-config-folder).
-:::
 
 ## Flashing Your Changes
 

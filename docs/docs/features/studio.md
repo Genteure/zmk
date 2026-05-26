@@ -2,13 +2,7 @@
 title: ZMK Studio
 ---
 
-ZMK Studio provides runtime update functionality to ZMK powered devices, allowing users to change their keymap layers without flashing new firmware to their keyboards.
-
-:::info
-
-To use ZMK Studio, a keyboard needs to be [configured appropriately](#adding-zmk-studio-support-to-a-keyboard). ZMK has updated some, but not all, of its in-tree keyboards for use with ZMK Studio, the list of which can be found [here](/blog/2024/11/11/zmk-studio-mvp-ga). If your keyboard is supported by an external module/config, check with the maintainer to see if support has been added.
-
-:::
+ZMK Studio provides runtime update functionality to ZMK powered devices, allowing users to change their keymap layers without flashing new firmware to their keyboards. To use ZMK Studio, a keyboard needs to be [configured appropriately](#adding-zmk-studio-support-to-a-keyboard). ZMK has updated some, but not all, of its in-tree keyboards for use with ZMK Studio, the list of which can be found [here](/blog/2024/11/11/zmk-studio-mvp-ga). If your keyboard is supported by an external module/config, check with the maintainer to see if support has been added.
 
 ## Capabilities
 
@@ -64,12 +58,7 @@ To use ZMK Studio over USB, you need permission to access the USB serial port. T
 
 :::
 
-:::note
-
-If you are connected to the computer over both USB and BLE endpoints, you should set the keyboard output to the same endpoint that you connect to ZMK Studio using.
-For example, if you are connecting to ZMK Studio over USB, ensure that USB output is selected by invoking the `&out OUT_USB` [behavior](../keymaps/behaviors/outputs.md).
-
-:::
+If you are connected to the computer over both USB and BLE endpoints, you should set the keyboard output to the same endpoint that you connect to ZMK Studio using. For example, if you are connecting to ZMK Studio over USB, ensure that USB output is selected by invoking the `&out OUT_USB` [behavior](../keymaps/behaviors/outputs.md).
 
 ## Building
 

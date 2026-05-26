@@ -46,11 +46,7 @@ The soft off feature is used to turn the keyboard on and off explicitly, rather 
 
 The feature is intended as an alternative to using a hardware switch to physically cut power from the battery to the keyboard. This can be useful for existing PCBs not designed for wireless that don't have a power switch, or for new designs that favor a push button on/off like found on other devices. It yields power savings comparable to the deep sleep state.
 
-:::note
-
 The device enters the same software power-off state as in deep sleep, but is significantly more restrictive in the sources which can wake it. Power is _not_ technically removed from the entire system, unlike a hardware switch.
-
-:::
 
 A device can be put in the soft off state by:
 

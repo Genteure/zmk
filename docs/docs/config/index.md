@@ -7,9 +7,7 @@ ZMK has many configuration settings that can be changed to change the behavior o
 
 This page describes the Kconfig and Devicetree file formats and how to change settings in them. See the other pages in the configuration section for a list of settings you can change.
 
-:::note
-All configuration is currently set at compile time. After changing any settings, you must build new firmware and flash it for the changes to apply.
-:::
+Note that all configuration is currently set at compile time — after changing any settings, you must build new firmware and flash it for the changes to apply.
 
 ## Config File Locations
 
@@ -82,13 +80,7 @@ Files ending with `_defconfig` use the same syntax as `.conf` files. They set th
 
 The list of available settings is determined by various files in ZMK whose names start with `Kconfig`. Note that options are _not_ prefixed with `CONFIG_` in these files.
 
-See [Zephyr's Kconfig documentation](https://docs.zephyrproject.org/4.1.0/build/kconfig/index.html) for more details on Kconfig files.
-
-:::tip
-
-You can investigate the [final set of configuration settings](../troubleshooting/building-issues.md#configuration-setting-issues) that are in effect during a build to diagnose any issues with changing Kconfig settings.
-
-:::
+See [Zephyr's Kconfig documentation](https://docs.zephyrproject.org/4.1.0/build/kconfig/index.html) for more details on Kconfig files. You can also investigate the [final set of configuration settings](../troubleshooting/building-issues.md#configuration-setting-issues) that are in effect during a build to diagnose any issues with changing Kconfig settings.
 
 ### KConfig Value Types
 
@@ -139,13 +131,7 @@ Devicetree files look like this:
 
 Devicetree properties apply to specific nodes in the tree instead of globally. The properties that can be set for each node are determined by `.yaml` files in ZMK in the various `dts/bindings` folders.
 
-See [Zephyr's Devicetree guide](https://docs.zephyrproject.org/4.1.0/build/dts/index.html) for more details on Devicetree files.
-
-:::tip
-
-You can investigate the [final combined Devicetree](../troubleshooting/building-issues.md#devicetree-related-issues) produced during a build to diagnose any issues with changing Devicetree nodes.
-
-:::
+See [Zephyr's Devicetree guide](https://docs.zephyrproject.org/4.1.0/build/dts/index.html) for more details on Devicetree files. You can also investigate the [final combined Devicetree](../troubleshooting/building-issues.md#devicetree-related-issues) produced during a build to diagnose any issues with changing Devicetree nodes.
 
 ### Changing Devicetree Properties
 

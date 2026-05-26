@@ -164,11 +164,7 @@ The following will send a scroll left event to the host when pressed/held:
 &msc SCRL_LEFT
 ```
 
-:::note
-
 If you enabled [smooth scrolling](../../config/pointing.md#kconfig) then you will want to use the same `MOVE_UP`, `MOVE_DOWN`, etc values instead of the smaller `SCRL_*` parameters for more sensible scroll speeds.
-
-:::
 
 ### Input Processors
 

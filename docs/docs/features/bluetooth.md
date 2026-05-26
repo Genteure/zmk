@@ -5,11 +5,7 @@ sidebar_label: Bluetooth
 
 ZMK's bluetooth functionality allows users to connect their keyboards to hosts using Bluetooth Low Energy (BLE) technology. It also is used for [split keyboards](split-keyboards.md) to connect the two halves wirelessly.
 
-:::note
-
 Bluetooth 4.2 or newer is required in order to connect to a ZMK keyboard. ZMK implements advanced security using BLE's Secure Connection feature, which requires Bluetooth 4.2 at a minimum. To avoid well-known security vulnerabilities, we disallow using Legacy pairing.
-
-:::
 
 ## Security
 

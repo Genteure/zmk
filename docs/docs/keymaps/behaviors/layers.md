@@ -8,12 +8,9 @@ sidebar_label: Layers
 Often, you may want a certain key position to alter which layers are enabled, change the default layer, etc.
 Below are the list of behaviors that can be used to activate and deactivate layers.
 
-:::note
 Multiple layers can be active at the same time and activating a layer will not deactivate layers higher up in the "layer stack".
-
 Layer numbers start at 0 following the order they are defined in the keymap node, for example `&mo 3` would activate the 4th layer node defined in the keymap.
 See [Layers](../index.mdx#layers) for more information.
-:::
 
 ## Momentary Layer
 

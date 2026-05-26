@@ -34,13 +34,7 @@ Additional overrides can be added that only apply when the associated layer is a
 }
 ```
 
-:::note
-
-Overrides are processed in the order they are declared, from top to bottom, followed by the base processors in the parent node. Their application order is _not_ in any way tied to the layers specified in the `layers` property.
-
-:::
-
-By default, the first-defined override node that matches the layer specification will apply, in which case and any other overrides or the base processors will be skipped. If you add the `process-next;` property to a child node, the other processors will continue to be checked and applied even if that node's layer filter matches.
+By default, the first-defined override node that matches the layer specification will apply, in which case and any other overrides or the base processors will be skipped. Note that overrides are processed in the order they are declared, from top to bottom, followed by the base processors in the parent node. Their application order is _not_ in any way tied to the layers specified in the `layers` property. If you add the `process-next;` property to a child node, the other processors will continue to be checked and applied even if that node's layer filter matches.
 
 ```dts
 #include <input/processors.dtsi>

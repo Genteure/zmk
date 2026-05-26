@@ -3,10 +3,7 @@ title: Getting Started
 sidebar_label: Getting Started
 ---
 
-:::tip
-We recommend reading through the setup process before following it step by step,
-to ensure that you are happy with installing the required dependencies.
-:::
+We recommend reading through the setup process before following it step by step, to ensure that you are happy with installing the required dependencies.
 
 ## Environment Setup
 

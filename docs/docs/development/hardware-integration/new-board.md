@@ -26,11 +26,9 @@ There also exist many boards in the tree of upstream Zephyr. We generally accept
 
 Regardless of whether you aim to include the board in ZMK or not, you should first write the definition for it in a module. A new ZMK module repository can be created from a template.
 
-:::note
-This guide assumes you already have a configured GitHub account. If you don't yet have one, go ahead and [sign up](https://github.com/join) before continuing.
-:::
-
 Follow these steps to create your new repository:
+
+This guide assumes you already have a configured GitHub account. If you don't yet have one, go ahead and [sign up](https://github.com/join) before continuing.
 
 - Visit https://github.com/zmkfirmware/unified-zmk-config-template
 - Click the green "Use this template" button

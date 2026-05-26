@@ -48,8 +48,4 @@ Please follow the full procedure described in [troubleshooting](../troubleshooti
 
 :::
 
-:::tip
-
 [ZMK Studio](../features/studio.md)-specific settings can be easily cleared using the "Restore Stock Settings" button in the header of the Studio client.
-
-:::

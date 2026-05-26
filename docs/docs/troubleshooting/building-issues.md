@@ -11,11 +11,7 @@ For more information, see [Zephyr's CMake Package](https://docs.zephyrproject.or
 
 ## West Build Errors
 
-West build errors usually indicate syntax problems in the `<keyboard>.keymap` file during the compilation process. The following are some examples and root causes.
-
-:::note
-If you are reviewing these errors in the GitHub Actions tab, they can be found in the `West Build` step of the build process.
-:::
+West build errors usually indicate syntax problems in the `<keyboard>.keymap` file during the compilation process. The following are some examples and root causes. If you are reviewing these errors in the GitHub Actions tab, they can be found in the `West Build` step of the build process.
 
 ### Keymap Error
 
@@ -51,11 +47,7 @@ A `devicetree_generated.h` error that follows with an "undeclared here" string i
 /__w/zmk-config/zmk-config/build/zephyr/include/generated/devicetree_generated.h:3756:145: error: 'DT_N_S_keymap_S_symbol_layer_P_bindings_IDX_12_PH_P_label' undeclared here (not in a function); did you mean 'DT_N_S_keymap_S_symbol_layer_P_bindings_IDX_16_PH'?
 ```
 
-In this example, the error string `DT_N_S_keymap_S_symbol_layer_P_bindings_IDX_12_PH_P_label` indicates a problem with the key binding in position `12` in the `symbol_layer` of the keymap.
-
-:::info
-Key positions are numbered starting from `0` at the top left key on the keymap, incrementing horizontally, row by row.
-:::
+In this example, the error string `DT_N_S_keymap_S_symbol_layer_P_bindings_IDX_12_PH_P_label` indicates a problem with the key binding in position `12` in the `symbol_layer` of the keymap. Key positions are numbered starting from `0` at the top left key on the keymap, incrementing horizontally, row by row.
 
 :::tip
 A common mistake that leads to this error is to use [key press keycodes](keymaps/behaviors/key-press.md) without the leading `&kp` binding. That is, having entries such as `SPACE` that should have been `&kp SPACE`.

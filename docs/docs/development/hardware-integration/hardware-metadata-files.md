@@ -42,11 +42,7 @@ The first line of every metadata file should contain the file format. As of toda
 file_format: "1"
 ```
 
-:::note
-
 ZMK plans to expand on the initial based set of metadata properties, while maintaining backwards compatibility. In particular, new _optional_ properties may be added to file format `1` as time progress, and when new set of properties is settled upon as being required moving forward, a new major version of the file format will be created to encompass those changes.
-
-:::
 
 ### Item ID and Name
 

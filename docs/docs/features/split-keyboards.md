@@ -54,11 +54,7 @@ The full-duplex wired UART transport is a recent addition, and is intended for t
 
 This transport will be enabled for designs that set `CONFIG_ZMK_SPLIT=y` and have a node with `compatible = "zmk,wired-split";` present in their devicetree configuration.
 
-:::note[Full Duplex vs Half Duplex]
-Full-duplex UART requires the use of two wires connecting the halves. Future half-duplex (single-wire) UART support, which is planned, will allow using wired ZMK with designs such as the Corne, Sweep, etc. that use only a single GPIO pin for bidirectional communication between split sides.
-
-Until half-duplex support is completed, those particular designs will not work with the wired split transport, and can only be used with the Bluetooth transport.
-:::
+Full-duplex UART requires the use of two wires connecting the halves. Future half-duplex (single-wire) UART support, which is planned, will allow using wired ZMK with designs such as the Corne, Sweep, etc. that use only a single GPIO pin for bidirectional communication between split sides. Until half-duplex support is completed, those particular designs will not work with the wired split transport, and can only be used with the Bluetooth transport.
 
 ### Runtime Switching
 
@@ -89,9 +85,7 @@ In practice, this means that your split keyboard parts will automatically pair a
 However, if this process somehow went wrong or you used controllers in a different split keyboard configuration before, you will need to explicitly clear the stored bond information so that the parts can pair properly.
 For this, please follow [the specified procedure](../troubleshooting/connection-issues.mdx#split-keyboard-parts-unable-to-pair) in the troubleshooting section.
 
-:::warning
-If the central keyboard part is either advertising for a pairing or waiting for disconnected peripherals, it will consume more power and drain batteries faster.
-:::
+Note that if the central keyboard part is either advertising for a pairing or waiting for disconnected peripherals, it will consume more power and drain batteries faster.
 
 ## Behaviors with Locality
 
@@ -118,6 +112,4 @@ Peripherals must be paired and connected to the central in order to be able to a
 This is because the key bindings are processed on the central side which would then instruct the peripheral side to run the behavior's effect.
 :::
 
-:::note[Combos]
 [Combos](../keymaps/combos.md) always invoke behaviors with source locality on the central.
-:::

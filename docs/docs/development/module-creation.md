@@ -12,9 +12,7 @@ sidebar_label: ZMK Module Creation
 
 See also Zephyr's [page on modules](https://docs.zephyrproject.org/4.1.0/develop/modules.html).
 
-:::tip
 For open source hardware designs, it can be convenient to use [Git submodules](https://github.blog/open-source/git/working-with-submodules/) to have the ZMK module also be a Git submodule of the repository hosting the hardware design.
-:::
 
 ## Module Setup
 
@@ -22,9 +20,7 @@ ZMK has a template to make creating a module easier. Navigate to [the ZMK module
 
 The rest of this page will go through the contents of the template step by step, guiding you through the configuration of the module.
 
-:::tip
 The [Unified ZMK Config Template](https://github.com/zmkfirmware/unified-zmk-config-template) is also a module, albeit one focused on keyboards. If you are making a module for a keyboard, you may find it useful to base the module off of the template and use GHA to help troubleshoot any errors. Later, you can extract the keyboard to a dedicated module or remove superfluous parts from your module with the help of the information on this page.
-:::
 
 ### Zephyr Module File
 
@@ -132,9 +128,7 @@ Note that the `include` and `src` folders are not mandated by the module system,
 
 Modules should expose all provided header files with an include path name beginning with the module-name, for example at `include/zmk_<type>_<description>/<header>.h`.
 
-:::info
 If your module requires adding drivers to existing subsystems in modules, you will need to use the `zephyr_library_amend()` CMake command, which requires you to have a specific directory structure. See [here](https://github.com/zephyrproject-rtos/zephyr/blob/main/cmake/modules/extensions.cmake#L454) for the definition and some documentation in the comments, with an example [here](https://github.com/petejohanson/ec-support-zmk-module/tree/main/drivers/kscan).
-:::
 
 ## Examples
 

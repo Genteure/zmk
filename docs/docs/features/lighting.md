@@ -11,20 +11,11 @@ Your keyboard likely uses only one type, depending on the type of LED hardware i
 - [Backlight](#backlight) system controls parallel-connected, non-addressable, single color LEDs.
   These are found on keyboards that have a single color backlight that only allows for brightness control.
 
-:::warning
-
-Although the naming of the systems might imply it, which system you use typically does _not_ depend on the physical location of the LEDs.
-Instead, you should use the one that supports the LED hardware type that your keyboard has, as described above.
-
-:::
+Note that which system you use typically does _not_ depend on the physical location of the LEDs, despite what the naming might imply. Instead, you should use the one that supports the LED hardware type that your keyboard has, as described above.
 
 ## RGB Underglow
 
-RGB underglow is a feature used to control "strips" of RGB LEDs. Most of the time this is called underglow and creates a glow underneath the board using a ring of LEDs around the edge, hence the name. However, this can be extended to be used to control anything from a single LED to a long string of LEDs anywhere on the keyboard.
-
-:::info
-RGB underglow can also be used for per-key lighting. If you have RGB LEDs on your keyboard, this is what you want. For PWM/single color LEDs, see [Backlight section below](#backlight).
-:::
+RGB underglow is a feature used to control "strips" of RGB LEDs. Most of the time this is called underglow and creates a glow underneath the board using a ring of LEDs around the edge, hence the name. However, this can be extended to be used to control anything from a single LED to a long string of LEDs anywhere on the keyboard. RGB underglow can also be used for per-key lighting. For PWM/single color LEDs, see [Backlight section below](#backlight).
 
 ZMK relies on Zephyr's `led-strip` drivers for this feature. The following LEDs/LED families have been implemented:
 
@@ -77,11 +68,7 @@ See [RGB underglow hardware integration page](../development/hardware-integratio
 
 ## Backlight
 
-Backlight is a feature used to control an array of LEDs, usually placed through or under switches.
-
-:::info
-Unlike [RGB underglow](#rgb-underglow), backlight can only control single color LEDs. Additionally, because backlight LEDs all receive the same power, it's not possible to dim individual LEDs.
-:::
+Backlight is a feature used to control an array of LEDs, usually placed through or under switches. Unlike [RGB underglow](#rgb-underglow), backlight can only control single color LEDs. Additionally, because backlight LEDs all receive the same power, it's not possible to dim individual LEDs.
 
 ### Enabling Backlight
 
