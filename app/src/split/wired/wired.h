@@ -50,6 +50,13 @@ typedef void (*zmk_split_wired_process_tx_callback_t)(void);
 
 void zmk_split_wired_poll_out(struct ring_buf *tx_buf, const struct device *uart);
 
+/**
+ * @brief Read whatever the UART has available into @p rx_buf and wake the consumer.
+ *
+ * @retval >=0 Number of bytes read from the UART.
+ * @retval -ENOSPC The RX buffer had no room; the consumer is still woken so it can
+ *                 drain the buffer.
+ */
 int zmk_split_wired_poll_in(struct ring_buf *rx_buf, const struct device *uart,
                             struct k_work *process_data_work,
                             zmk_split_wired_process_tx_callback_t process_data_cb);

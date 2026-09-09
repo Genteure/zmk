@@ -34,23 +34,24 @@ int zmk_split_wired_poll_in(struct ring_buf *rx_buf, const struct device *uart,
     uint8_t *buf;
     uint32_t read = 0;
     uint32_t claim_len = ring_buf_put_claim(rx_buf, &buf, ring_buf_space_get(rx_buf));
-    if (claim_len < 1) {
-        LOG_WRN("No room available for reading in from the serial port");
-        return -ENOSPC;
-    }
 
-    bool all_read = false;
-    while (read < claim_len) {
-        if (uart_poll_in(uart, buf + read) < 0) {
-            all_read = true;
-            break;
+    if (claim_len > 0) {
+        while (read < claim_len) {
+            if (uart_poll_in(uart, buf + read) < 0) {
+                break;
+            }
+
+            read++;
         }
 
-        read++;
+        ring_buf_put_finish(rx_buf, read);
+    } else {
+        LOG_WRN("No room available for reading in from the serial port");
     }
 
-    ring_buf_put_finish(rx_buf, read);
-
+    // Wake the consumer even when we could not make room for new bytes this time.
+    // It is the only thing that drains the RX buffer, so skipping it while the
+    // buffer is full would leave it full forever and permanently stall reception.
     if (ring_buf_size_get(rx_buf) > 0) {
         if (process_data_work) {
             k_work_submit(process_data_work);
@@ -59,8 +60,7 @@ int zmk_split_wired_poll_in(struct ring_buf *rx_buf, const struct device *uart,
         }
     }
 
-    // TODO: Also indicate if no bytes read at all?
-    return (all_read ? 1 : 0);
+    return (claim_len > 0) ? (int)read : -ENOSPC;
 }
 
 #endif // IS_ENABLED(CONFIG_ZMK_SPLIT_WIRED_UART_MODE_POLLING)
