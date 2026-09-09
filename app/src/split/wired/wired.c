@@ -218,15 +218,19 @@ static void async_uart_cb(const struct device *dev, struct uart_event *ev, void 
         size_t received =
             ring_buf_put(state->rx_buf, &ev->data.rx.buf[ev->data.rx.offset], ev->data.rx.len);
         if (received < ev->data.rx.len) {
-            LOG_ERR("RX overrun!");
-            break;
+            LOG_ERR("RX overrun, dropped %u bytes",
+                    (unsigned int)(ev->data.rx.len - received));
         }
 
         // LOG_DBG("RX %d and now buffer is %d", received, ring_buf_size_get(state->rx_buf));
-        if (state->process_tx_callback) {
-            state->process_tx_callback();
-        } else if (state->process_tx_work) {
-            k_work_submit(state->process_tx_work);
+        // Wake the consumer whenever there is buffered data, even if this chunk was
+        // only partially stored; that is what drains the buffer and makes room.
+        if (ring_buf_size_get(state->rx_buf) > 0) {
+            if (state->process_tx_callback) {
+                state->process_tx_callback();
+            } else if (state->process_tx_work) {
+                k_work_submit(state->process_tx_work);
+            }
         }
 
         break;
