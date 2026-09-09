@@ -149,7 +149,7 @@ void zmk_split_wired_async_tx(struct zmk_split_wired_async_state *state) {
     }
 
 #if !IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
-    LOG_DBG("Sending %d", claim_len);
+    LOG_DBG("Sending %u", (unsigned int)claim_len);
 #endif
     int err = uart_tx(state->uart, buf, claim_len, SYS_FOREVER_US);
     if (err < 0) {
@@ -204,7 +204,7 @@ static void async_uart_cb(const struct device *dev, struct uart_event *ev, void 
         }
         break;
     case UART_TX_DONE:
-        LOG_DBG("TX Done %d", ev->data.tx.len);
+        LOG_DBG("TX Done %zu", ev->data.tx.len);
         ring_buf_get_finish(state->tx_buf, ev->data.tx.len);
         if (ring_buf_size_get(state->tx_buf) > 0) {
             zmk_split_wired_async_tx(state);
@@ -343,8 +343,8 @@ int zmk_split_wired_get_item(struct ring_buf *rx_buf, uint8_t *env, size_t env_s
 
         uint32_t crc = crc32_ieee(env, payload_to_read);
         if (crc != postfix.crc) {
-            LOG_WRN("Data corruption in received peripheral event, ignoring %d vs %d", crc,
-                    postfix.crc);
+            LOG_WRN("Data corruption in received peripheral event, ignoring %u vs %u",
+                    (unsigned int)crc, (unsigned int)postfix.crc);
             return -EINVAL;
         }
 
