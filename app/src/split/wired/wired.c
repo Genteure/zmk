@@ -292,9 +292,13 @@ int zmk_split_wired_get_item(struct ring_buf *rx_buf, uint8_t *env, size_t env_s
         size_t payload_to_read = sizeof(prefix) + prefix.payload_size;
 
         if (payload_to_read > env_size) {
-            LOG_WRN("Invalid message with payload %d bigger than expected max %d", payload_to_read,
-                    env_size);
-            return -EINVAL;
+            LOG_WRN("Invalid message with payload %zu bigger than expected max %zu, resyncing",
+                    payload_to_read, env_size);
+            // Discard a byte and keep scanning for the next magic prefix. Returning an
+            // error without consuming here would wedge the parser on the same bad header
+            // forever (and eventually fill the RX buffer).
+            ring_buf_get(rx_buf, NULL, 1);
+            continue;
         }
 
         if (ring_buf_size_get(rx_buf) < payload_to_read + sizeof(struct msg_postfix)) {
