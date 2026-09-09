@@ -153,7 +153,13 @@ void zmk_split_wired_async_tx(struct zmk_split_wired_async_state *state) {
 #endif
     int err = uart_tx(state->uart, buf, claim_len, SYS_FOREVER_US);
     if (err < 0) {
-        LOG_DBG("NO TX %d", err);
+        LOG_ERR("Failed to start async TX (%d), retrying later", err);
+        // Release the claim so the unsent bytes remain in the ring buffer instead of
+        // being skipped by the next claim (which would corrupt the byte stream).
+        ring_buf_get_finish(state->tx_buf, 0);
+        if (state->dir_gpio) {
+            gpio_pin_set_dt(state->dir_gpio, 0);
+        }
     }
 }
 
@@ -188,9 +194,14 @@ static void async_uart_cb(const struct device *dev, struct uart_event *ev, void 
 
     switch (ev->type) {
     case UART_TX_ABORTED:
-        // This can only really occur for a TX timeout for a HW flow control UART setup. What to do
-        // here in practice?
+        // This can only really occur for a TX timeout for a HW flow control UART setup.
+        // Release the in-flight claim so the unsent bytes stay in the ring buffer and
+        // make sure we stop driving the half-duplex bus.
         LOG_WRN("TX Aborted");
+        ring_buf_get_finish(state->tx_buf, 0);
+        if (state->dir_gpio) {
+            gpio_pin_set_dt(state->dir_gpio, 0);
+        }
         break;
     case UART_TX_DONE:
         LOG_DBG("TX Done %d", ev->data.tx.len);
