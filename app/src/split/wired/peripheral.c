@@ -51,8 +51,6 @@ RING_BUF_DECLARE(chosen_tx_buf, TX_BUFFER_SIZE);
 
 static const uint8_t peripheral_id = 0;
 
-K_SEM_DEFINE(tx_sem, 0, 1);
-
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
 static const struct device *uart = DEVICE_DT_GET(DT_INST_PHANDLE(0, device));
