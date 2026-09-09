@@ -71,21 +71,30 @@ void zmk_split_wired_fifo_read(const struct device *dev, struct ring_buf *buf,
                                struct k_work *process_work,
                                zmk_split_wired_process_tx_callback_t process_cb) {
     // TODO: Add error checking on platforms that support it
-    uint32_t last_read = 0, len = 0;
+    int last_read = 0;
+    uint32_t len = 0;
     do {
         uint8_t *buffer;
         len = ring_buf_put_claim(buf, &buffer, buf->size);
         if (len > 0) {
             last_read = uart_fifo_read(dev, buffer, len);
+            if (last_read < 0) {
+                LOG_ERR("UART FIFO read failed (%d)", last_read);
+                ring_buf_put_finish(buf, 0);
+                break;
+            }
 
-            ring_buf_put_finish(buf, last_read);
+            if (ring_buf_put_finish(buf, last_read) < 0) {
+                LOG_ERR("Failed to commit %d received bytes", last_read);
+            }
         } else {
-            LOG_ERR("Dropping incoming RPC byte, insufficient room in the RX buffer. Bump "
-                    "CONFIG_ZMK_STUDIO_RPC_RX_BUF_SIZE.");
+            LOG_ERR("Dropping incoming byte, insufficient room in the RX buffer. Bump "
+                    "CONFIG_ZMK_SPLIT_WIRED_CMD_BUFFER_ITEMS or "
+                    "CONFIG_ZMK_SPLIT_WIRED_EVENT_BUFFER_ITEMS.");
             uint8_t dummy;
             last_read = uart_fifo_read(dev, &dummy, 1);
         }
-    } while (last_read && last_read == len);
+    } while (last_read > 0 && (uint32_t)last_read == len);
 
     if (process_work) {
         k_work_submit(process_work);
