@@ -13,7 +13,7 @@ name: release-please
 jobs:
   handle-commit:
     name: Handle new commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       major: ${{ steps.release.outputs.major }}
@@ -29,7 +29,7 @@ jobs:
   release-new-version:
     name: Release new version
     needs: handle-commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     if: ${{ needs.handle-commit.outputs.release_created }}
     env:
       ZMK_RELEASE_PLEASE_TOKEN: ${{ secrets.ZMK_RELEASE_PLEASE_TOKEN }}
@@ -56,7 +56,7 @@ jobs:
   bump-user-config-template-version:
     name: Bump user config template version
     needs: handle-commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     if: ${{ needs.handle-commit.outputs.release_created }}
     env:
       ZMK_RELEASE_PLEASE_TOKEN: ${{ secrets.ZMK_RELEASE_PLEASE_TOKEN }}

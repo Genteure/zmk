@@ -16,7 +16,7 @@ on:
 
 jobs:
   validate-metadata:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     container:
       image: docker.io/zmkfirmware/zmk-dev-arm:4.1
     steps:
